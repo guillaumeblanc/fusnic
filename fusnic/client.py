@@ -6,6 +6,9 @@ import datetime
 from . import session
 from . import exception
 
+# Based on documentation iMaster NetEco V600R023C00 Northbound Interface Reference-V6(SmartPVMS)
+# https://support.huawei.com/enterprise/en/doc/EDOC1100261860/
+
 
 class Client:
     def __init__(self, session: session.Session):

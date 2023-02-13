@@ -1,9 +1,8 @@
 # FusionSolar Northbound Interface Client
 
 Provides a Python API to access Huawei FusionSolar web service to download SmartPVMS data.
-To login you need account on Huawei FusionSolar https://eu5.fusionsolar.huawei.com.
-
-Implementation is based on Huawei SmartPVMS [Northbound Interface Reference V6](https://support.huawei.com/enterprise/en/doc/EDOC1100261860) documentation.
+To login you need account on Huawei FusionSolar https://intl.fusionsolar.huawei.com.
+Queried data are return as-is. Please refer to Huawei SmartPVMS [Northbound Interface Reference V6](https://support.huawei.com/enterprise/en/doc/EDOC1100261860) documentation for more details about data format.
 
 # Usage
 

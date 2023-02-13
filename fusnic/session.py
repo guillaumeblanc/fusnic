@@ -26,10 +26,15 @@ def exceptions_sanity(func):
 
 
 class Session:
-    def __init__(self, user: str, password: str):
+    def __init__(self, user: str, password: str, base_url='https://intl.fusionsolar.huawei.com'):
+        '''
+        Instantiate a session that'll login to Fusion Solar Northbound interface and allow to post requests.
+        Errors are reported as exceptions. See exception.py for all public exceptions.
+        Huawei Northbound interface address can be change to adapt to different location. Base address is https://intl.fusionsolar.huawei.com.
+        '''
         self.user = user
         self.password = password
-        self.base_url = "https://eu5.fusionsolar.huawei.com/thirdData/"
+        self.base_url = base_url + '/thirdData/'
         self.session = requests.session()
         self.session.headers.update(
             {'Connection': 'keep-alive', 'Content-Type': 'application/json'})
