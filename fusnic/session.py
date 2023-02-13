@@ -20,7 +20,7 @@ def exceptions_sanity(func):
         except exception._InternalException as e:
             logging.exception(
                 'Internal exceptions getting out of of the private code.')
-            raise exception.Exception()
+            raise exception.Exception(e.args[0], e.args[1]) from None
 
     return wrap
 

@@ -42,7 +42,7 @@ def _FailCodeToException(body):
         20001: LoginFailed,  # The third-party system ID does not exist.
         20002: LoginFailed,  # The third-party system is forbidden.
         20003: LoginFailed,  # The third-party system has expired.
-        20618: FrequencyLimit, # Maximum number of calls per user per day.
+        20618: FrequencyLimit,  # Maximum number of calls per user per day.
         30029: LoginFailed,  # Authentication failed.
     }
 
@@ -50,4 +50,5 @@ def _FailCodeToException(body):
     failCode = body.get('failCode', 0)
     logging.debug('failCode ' + str(failCode) +
                   ' received with body: ' + str(body))
-    return switcher.get(failCode, _InternalException)(failCode, body.get('message', 'No message.'))
+    message = body.get('message', None)
+    return switcher.get(failCode, _InternalException)(failCode, message if message else 'No error message.')
