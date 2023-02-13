@@ -98,7 +98,9 @@ class ClientSession(Client):
         return super().__init__(session=session.Session(user=user, password=password))
 
     def __enter__(self):
+        self.session.__enter__()
         return super().__enter__()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        self.session.__exit__(exc_type, exc_val, exc_tb)
         return super().__exit__(exc_type, exc_val, exc_tb)
