@@ -52,7 +52,7 @@ class TestClient(unittest.TestCase):
 
             # Daily data, with a plants list bigger than 100
             daily = client.get_plant_daily_data(
-                list(map(str, range(46))) + plants_code + list(map(str, range(88))), now)
+                list(map(str, range(46))) + plants_code + list(map(str, range(107))), now)
 
             # Monthly data
             monthly = client.get_plant_monthly_data(plants_code, now)

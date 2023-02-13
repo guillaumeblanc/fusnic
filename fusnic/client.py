@@ -29,10 +29,10 @@ class Client:
         plants = []
         for page in itertools.count(start=1):
             param = {'pageNo': page, 'pageSize': 100}
-            data = self.session.post(
+            response = self.session.post(
                 endpoint='getStationList', parameters=param)['data']
-            plants = plants + (data['list'] if data['list'] else [])
-            if page >= data['pageCount']:
+            plants = plants + response.get('list', [])
+            if page >= response['pageCount']:
                 return plants
 
     def _get_plant_data(self, endpoint, plants: list, parameters={}, batch_size=100) -> list:
@@ -40,11 +40,12 @@ class Client:
         Batches calls to by groups of 'batch_size' plants. 100 is the usual limit for FusionSolar.
         '''
         data = []
-        for batch in [plants[i:i + batch_size] for i in range(0, len(plants), batch_size)]:
+        unique_plants = list(dict.fromkeys(plants))  # Remove duplicates
+        for batch in [unique_plants[i:i + batch_size] for i in range(0, len(unique_plants), batch_size)]:
             parameters['stationCodes'] = ','.join(batch)
             response = self.session.post(
                 endpoint=endpoint, parameters=parameters)
-            data = data + (response['data'] if response['data'] else [])
+            data = data + response.get('data', [])
         return data
 
     def get_plant_realtime_data(self, plants: list) -> list:
