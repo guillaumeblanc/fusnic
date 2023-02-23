@@ -11,13 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Python setup
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-          cache: 'pip'
-      - name: Install python dependencies
-        run: pip install -r requirements.txt
+      - name: Setup python
+        uses: ./.github/actions/setup_python
       - name: Test
         run: python3 -m unittest discover
       - name: HowTo
