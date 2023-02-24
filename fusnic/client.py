@@ -20,6 +20,16 @@ class Client:
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
 
+    @staticmethod
+    def from_timestamp(timestamp: int):
+        '''Converts fusion solar timestamp to datetime.'''
+        return datetime.datetime.fromtimestamp(timestamp / 1000.)
+
+    @staticmethod
+    def to_timestamp(time: datetime.datetime):
+        '''Converts datetime to fusion solar timestamp.'''
+        return int(time.timestamp() * 1e3)
+
     def get_plant_list(self) -> list:
         '''
         Get basic plants information.
@@ -61,7 +71,7 @@ class Client:
         Internal function for getting plant data by plants ID set and date.
         '''
         # Time is in milliseconds
-        parameters = {'collectTime': int(date.timestamp() * 1e3)}
+        parameters = {'collectTime': self.to_timestamp(date)}
         return self._get_plant_data(endpoint, plants, parameters)
 
     def get_plant_hourly_data(self, plants: list, date: datetime.datetime) -> list:
