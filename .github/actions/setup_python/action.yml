@@ -1,5 +1,10 @@
 name: 'Setup python'
 description: 'Setup python and required packages'
+inputs:
+  requirements:
+    description: 'Requirements'
+    default: 'requirements.txt'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -11,4 +16,4 @@ runs:
     - name: Install python dependencies
       shell: bash
       run: |
-        pip install -r requirements.txt
+        pip install -r ${{inputs.requirements}}
